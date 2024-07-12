@@ -1,12 +1,14 @@
 <script setup>
 import "./App";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <p class="app-class">Header</p>
+  <Header />
   <RouterView />
-  <p>Footer</p>
+  <Footer />
 </template>
 
 <style src="./App.scss" lang="scss"></style>

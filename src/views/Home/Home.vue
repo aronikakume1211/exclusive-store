@@ -1,3 +1,7 @@
+<script setup>
+import Hero from "@/components/Hero";
+
+</script>
 <template>
-    Home Exclusive
+  <Hero />
 </template>

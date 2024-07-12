@@ -1,6 +1,7 @@
 import {
     Home,
-    NotFound
+    NotFound,
+    Contact
 } from "@/views";
 
 export default [
@@ -12,6 +13,15 @@ export default [
             title: 'Home',
             icon: 'home'
         },
+    },
+    {
+        path: '/contact',
+        component: Contact,
+        name: 'contact',
+        meta: {
+            title: 'Contact',
+
+        }
     },
     {
         path: '/:catchAll(.*)',
