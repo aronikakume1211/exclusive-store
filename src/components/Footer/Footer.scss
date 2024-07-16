@@ -1,0 +1,23 @@
+footer {
+    background-color: #000;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    color: #fff;
+
+    .footer_bottom {
+        height: 40px;
+        display: flex;
+        align-items: last baseline;
+        justify-content: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+
+        p {
+            font-family: Poppins;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            text-align: left;
+            color: #F9F9F933;
+        }
+    }
+}

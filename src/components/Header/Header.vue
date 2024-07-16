@@ -1,6 +1,11 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import logo from "../../assets/images/logo.png";
+import { useCartStore } from "@/store/cartStore";
+import { useWishlistStore } from "@/store/wishlistStore";
+
+const cartStore = useCartStore();
+const wishlistStore = useWishlistStore();
 </script>
 <template>
   <nav>
@@ -9,11 +14,13 @@ import logo from "../../assets/images/logo.png";
       <RouterLink to="/shop">Shop Now</RouterLink>
     </div>
     <div class="container">
-      <img :src="logo" alt="exclusive header logo" height="24px" />
+      <RouterLink to="/">
+        <img :src="logo" alt="exclusive header logo" height="24px" />
+      </RouterLink>
       <div class="navigation_links">
         <ul>
           <li>
-            <RouterLink to="/" >Home</RouterLink>
+            <RouterLink to="/">Home</RouterLink>
           </li>
           <li>
             <RouterLink to="/contact">Contact</RouterLink>
@@ -32,12 +39,19 @@ import logo from "../../assets/images/logo.png";
           <i class="pi pi-search"></i>
         </div>
         <p>
-          <RouterLink to="/whish"><i class="pi pi-heart"></i></RouterLink>
+          <RouterLink to="/whish">
+            <i class="pi pi-heart"></i>
+            <span v-if="wishlistStore.wishListCount > 0" class="cart_counter">{{
+              wishlistStore.wishListCount
+            }}</span>
+          </RouterLink>
         </p>
         <p>
           <RouterLink to="/cart">
             <i class="pi pi-shopping-cart"></i>
-            <span class="cart_counter">2</span>
+            <span v-if="cartStore.cartItemsCount > 0" class="cart_counter">{{
+              cartStore.cartItemsCount
+            }}</span>
           </RouterLink>
         </p>
       </div>
