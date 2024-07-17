@@ -3,6 +3,8 @@ import { defineStore } from "pinia";
 export const useCartStore = defineStore("cart", {
     state: () => ({
         cartItems: [],
+        couponCode: '',
+        discount: 10,
     }),
     actions: {
         addItemToCart(item) {
@@ -19,10 +21,28 @@ export const useCartStore = defineStore("cart", {
         clearCart() {
             this.cartItems = [];
         },
+
+        applyCoupon(couponCode){
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if(couponCode === 'FREE_SHIPPING'){
+                        this.discount = 10;
+                        this.couponCode= couponCode;
+                        resolve('Coupon Applied');
+
+                    }else{
+                        reject('Invalid Coupon');
+                    }
+                }, 1000);
+            });
+        }
     },
     getters: {
         cartTotal(state) {
-            return state.cartItems.reduce((a, c) => a + c.price, 0);
+            const total = state.cartItems.reduce((a, c) => a + c.price, 0);
+            const discountAmount = total * (state.discount / 100);
+            const finalTotal = total - discountAmount;
+            return finalTotal.toFixed(2);
         },
         cartItemsCount(state) {
             return state.cartItems.length;

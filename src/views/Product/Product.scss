@@ -1,0 +1,179 @@
+.product_detail_container {
+    display: flex;
+    // justify-content: space-between;
+    margin-top: 40px;
+    gap: 80px;
+
+    .product_detail_image_container {
+        display: flex;
+        gap: 20px;
+
+        .thumbnails_lists {
+            list-style: none;
+
+            li {
+                width: 170px;
+                height: 113px;
+                border-radius: 4px;
+                background-color: #F5F5F5;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid transparent;
+
+                &:hover {
+                    border: 1px solid gray;
+                    cursor: pointer;
+                }
+
+                img {
+                    object-fit: contain;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+    .product_image {
+        width: 500px;
+        height: 600px;
+        border-radius: 4px;
+        background-color: #F5F5F5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img{
+            transition: all 0.3s ease-in-out;
+            width: 100%;
+        }
+    }
+
+    .product_detail_right {
+        h1 {
+            //styleName: Heading/24PX SemiBold;
+            font-family: Inter;
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 24px;
+            letter-spacing: 0.03em;
+            text-align: left;
+
+        }
+
+        .product_stars_review {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .instock {
+                color: rgb(126, 196, 196);
+            }
+        }
+
+        .price {
+            //styleName: Heading/24PX Regular;
+            font-family: Inter;
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: 0.03em;
+            text-align: left;
+            margin: 10px 0px;
+
+        }
+
+        .description {
+            //styleName: Title/14PX Regular;
+            font-family: Poppins;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 21px;
+            text-align: left;
+            margin-bottom: 16px;
+        }
+    }
+
+    .product_btns {
+        margin: 20px 0px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        i {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .incremant_decrement_btns {
+            button {
+                width: 40px;
+                height: 44px;
+                border-radius: 4px 0px 0px 4px;
+                border: 1px solid rgba(0, 0, 0, 0.5);
+                background-color: #fff;
+                cursor: pointer;
+                // font-size: 20px;
+                border-right: 0px;
+            }
+
+            input {
+                width: 80px;
+                height: 40px;
+                text-align: center;
+            }
+
+            .btn_plus {
+                background-color: #DB4444;
+                border: none;
+                border-radius: 0px 4px 4px 0px;
+                color: #fff;
+            }
+        }
+    }
+
+    .free_delivery {
+        margin-top: 40px;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        border-radius: 4px;
+        min-height: 180px;
+
+        .free,
+        .return {
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            i{
+                font-size: 32px;
+            }
+            span {
+                font-family: Poppins;
+                font-size: 12px;
+                font-weight: 500;
+                line-height: 18px;
+                text-align: left;
+
+            }
+
+            .tit {
+                //styleName: Title/16PX Medium;
+                font-family: 'Poppins', sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 24px;
+                text-align: left;
+                color: #000;
+            }
+        }
+    }
+}

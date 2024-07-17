@@ -14,3 +14,7 @@ body{
 .pi-heart-fill{
     color: #DB4444;
 }
+.add_to_cart.added {
+    background-color: #767676 !important;
+    cursor: not-allowed !important;
+}

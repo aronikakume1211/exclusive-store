@@ -3,17 +3,37 @@ import { RouterLink } from "vue-router";
 import { useCartStore } from "@/store/cartStore";
 import { trimmedTitle } from "@/helper/utils";
 import Button from "@/helper/button.vue";
+import logo from '@/assets/images/loader.gif';
 import { reactive } from "vue";
 const cartStore = useCartStore();
 const cartItems = cartStore.cartItems;
 
 const updateCart = () => {
   // cartStore.updateCart();
-  console.log("updated..");
+  // console.log("updated..");
 };
 const state = reactive({
   quantity: 1,
+  couponCode: "",
+  loading: false
 });
+
+const applyCouponCode = () => {
+  console.log(cartItems);
+  state.loading = true;
+  cartStore
+    .applyCoupon(state.couponCode)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    }).finally(() => {
+      state.loading = false;
+      //  updateCart();
+     });
+};
+
 </script>
 <template>
   <div class="container conatiner_not_found">
@@ -64,8 +84,17 @@ const state = reactive({
       <div class="cart_coupon_cart_total">
         <div class="cart_coupon_container">
           <p>
-            <input type="text" placeholder="Coupon Code" />
-            <Button variant="danger">Apply Coupon</Button>
+            <input
+              type="text"
+              v-model="state.couponCode"
+              placeholder="Coupon Code"
+            />
+            <Button variant="danger" @click="applyCouponCode"
+              style="position: relative;">
+              <img v-if="state.loading" :src="logo" alt="" width="16" height="16" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"  />
+              Apply Coupon
+              </Button
+            >
           </p>
         </div>
         <div class="cart_total_container">

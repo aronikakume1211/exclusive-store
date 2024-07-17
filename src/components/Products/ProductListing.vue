@@ -3,6 +3,7 @@ import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 import { defineProps } from "vue";
 import { RouterLink } from "vue-router";
+import StarRating from "@/helper/rating.vue";
 const props = defineProps({
   product: Object,
   wishlist: Boolean,
@@ -12,7 +13,6 @@ const cartStore = useCartStore();
 const addToCart = (product) => {
   cartStore.addItemToCart(product);
 };
-console.log(props.wishlist);
 
 const wishlistStore = useWishlistStore();
 const addToWishList = (product) => {
@@ -61,14 +61,15 @@ const removeWishlist = (item) => {
       </button>
     </div>
     <h3>{{ product.title }}</h3>
-    <p>
+    <p style="display: flex; align-items: center; gap: 5px;">
       <span class="price"> ${{ product.price }} </span>
+      <StarRating :rating="product.rating" />
       <span class="rating">
         <i class="pi-star-full"></i>
         <!-- <i v-for="n in product?.rating.rate" :key="n" class="pi-star-full"></i> -->
       </span>
 
-      <span> ({{ product?.reviews.length }})</span>
+      <span> ({{ product?.reviews?.length }})</span>
     </p>
   </li>
 </template>
