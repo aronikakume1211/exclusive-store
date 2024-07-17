@@ -1,7 +1,10 @@
 import {
     Home,
     NotFound,
-    Contact
+    Contact,
+    Cart,
+    Wishlist,
+    Product
 } from "@/views";
 
 export default [
@@ -21,6 +24,33 @@ export default [
         meta: {
             title: 'Contact',
 
+        }
+    },
+    {
+        path: '/cart',
+        component: Cart,
+        name: 'cart',
+        meta: {
+            title: 'Cart',
+            icon: 'cart'
+        }
+    },
+    {
+        path: '/wishlist',
+        component: Wishlist,
+        name: 'Wishlist',
+        meta: {
+            title: 'Wishlist',
+            icon: 'wishlist'
+        },
+    },
+    {
+        path: `/product/:id`,
+        component: Product,
+        name: 'product',
+        meta: {
+            title: 'Product',
+            icon: 'product'
         }
     },
     {

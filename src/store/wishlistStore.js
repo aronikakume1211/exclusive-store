@@ -1,4 +1,8 @@
 import { defineStore } from "pinia";
+import { useCartStore } from "./cartStore";
+import router from "@/router";
+
+
 
 export const useWishlistStore = defineStore("wishlist", {
     state: () => ({
@@ -10,15 +14,25 @@ export const useWishlistStore = defineStore("wishlist", {
                 (i) => i.id === item.id
             );
             if (existingItem) {
-                this.removeItem(existingItem);
+                this.removeItemFromWishList(existingItem);
                 return;
             }
             this.wishlist.push(item);
             console.log(this.wishlist);
         },
-        removeItem(item) {
-            this.wishlist.splice(this.wishlist.indexOf(item), 1);
+        removeItemFromWishList(item) {
+            this.wishlist = this.wishlist.filter((i) => i.id !== item.id);
         },
+
+        moveAllToCart() {
+            const cartStore = useCartStore();
+
+            this.wishlist.forEach(item => {
+                cartStore.addItemToCart(item);
+                this.removeItemFromWishList(item);
+            });
+            router.push("/cart");
+        }
     },
     getters: {
         isInWishList: state => (id) => {

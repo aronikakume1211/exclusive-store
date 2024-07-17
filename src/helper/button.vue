@@ -7,7 +7,7 @@
   
   <script>
 export default {
-  name: "MyButton",
+  name: "Button",
   props: {
     type: {
       type: String,
@@ -53,9 +53,22 @@ export default {
   background-color: #6c757d;
   color: white;
 }
-.btn--danger{
-    background-color: #DB4444;
-    color: #FFFFFF;
+.btn--danger {
+  background-color: #db4444;
+  color: #ffffff;
+  border-radius: 4px;
+}
+.btn--border {
+  border: 1px solid #111112;
+  color: #000000;
+  background-color: inherit;
+  transition: all 0.3s ease-in-out;
+  border-radius: 4px;
+}
+.btn--border:hover {
+  background-color: #db4444;
+  color: #ffffff;
+  border: 1px solid #db4444;
 }
 /* Add more variants as needed */
 </style>

@@ -9,7 +9,7 @@ import ProductListing from "./ProductListing.vue";
 const { products, loading, error, fetchProducts } = useProducts();
 
 onMounted(() => {
-  fetchProducts();
+  fetchProducts(8);
   console.log(products);
   console.log(loading);
   console.log(error);
@@ -34,12 +34,7 @@ const handleClick = () => {
     </div>
     <div v-if="error">{{ error }}</div>
     <ul v-if="!loading && !error" class="product_lists">
-      <ProductListing v-for="product in products" :key="product.id" :product="product" />
-      <!-- <li v-for="product in products" :key="product.id">
-        {{ product.title }}
-        <Button @click="handleClick" variant="primary">Click Me</Button>
-        <Button @click="handleClick" variant="danger">delete</Button>
-      </li> -->
+      <ProductListing v-for="product in products" :key="product.id" :product="product" :wishlist="false" />
     </ul>
   </div>
 </template>

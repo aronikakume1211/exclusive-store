@@ -10,13 +10,14 @@ export const useProductsStore = defineStore("products", {
         };
     },
     actions: {
-        async fetchProducts() {
+        async fetchProducts(limit=8) {
             this.loading = true;
             this.error = null;
             try {
-                const response = await axios.get("https://fakestoreapi.com/products");
+                const response = await axios.get(`https://dummyjson.com/products?limit=${limit}`);
                 const data = await response.data;
-                this.products = data;
+                console.log(data.products);
+                this.products = data.products;
             } catch (error) {
                 this.error = error;
             } finally {

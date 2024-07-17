@@ -39,7 +39,7 @@ const wishlistStore = useWishlistStore();
           <i class="pi pi-search"></i>
         </div>
         <p>
-          <RouterLink to="/whish">
+          <RouterLink to="/wishlist">
             <i class="pi pi-heart"></i>
             <span v-if="wishlistStore.wishListCount > 0" class="cart_counter">{{
               wishlistStore.wishListCount
