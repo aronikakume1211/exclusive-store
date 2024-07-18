@@ -3,18 +3,28 @@ import { RouterLink } from "vue-router";
 import logo from "../../assets/images/logo.png";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
-import { watch } from "vue";
+import { reactive, watch } from "vue";
 
 const cartStore = useCartStore();
 const wishlistStore = useWishlistStore();
+
+const state = reactive({
+  isOpen: false,
+});
+
+const toggleUserMenu = () => {
+  state.isOpen = !state.isOpen;
+};
+
 watch(
   () => cartStore.isDark,
   (newVal) => {
     document.body.style.backgroundColor = newVal ? "#121212" : "#FFFFFF";
-    document.body.style.transition="all 0.5s ease-in-out";
+    document.body.style.transition = "all 0.5s ease-in-out";
   },
   { immediate: true }
 );
+
 </script>
 <template>
   <nav :dark="cartStore.isDark">
@@ -63,13 +73,44 @@ watch(
             }}</span>
           </RouterLink>
         </p>
-        <p>
+        <!-- <p>
           <i
             :class="cartStore.isDark ? 'pi pi-sun' : 'pi pi-moon'"
             style="font-size: 18px; cursor: pointer"
             @click="cartStore.toggleDarkMode"
           ></i>
-        </p>
+        </p> -->
+        <div class="navbar_profile">
+          <i
+          @click="toggleUserMenu"
+            class="pi pi-user"
+            style="font-size: 20px; cursor: pointer; margin-left: 10px"
+          ></i>
+          <div v-if="state.isOpen" class="navbar_profile_container">
+            <ul>
+              <li>
+                <i class="pi pi-user"></i>
+                <RouterLink to="/my-account">Manage My Account</RouterLink>
+              </li>
+              <li>
+                <i class="pi pi-shopping-bag"></i>
+                <RouterLink to="/my-orders">My Orders</RouterLink>
+              </li>
+              <li>
+                <i class="pi pi-times-circle"></i>
+                <RouterLink to="/my-cancellations">My Canellations</RouterLink>
+              </li>
+              <li>
+                <i class="pi pi-star"></i>
+                <RouterLink to="/my-reviews">My Reviews</RouterLink>
+              </li>
+              <li>
+                <i class="pi pi-sign-out"></i>
+                <RouterLink to="/my-account">Logout</RouterLink>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </nav>

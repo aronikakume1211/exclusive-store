@@ -64,6 +64,9 @@ export default {
   background-color: inherit;
   transition: all 0.3s ease-in-out;
   border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 .btn--border:hover {
   background-color: #db4444;

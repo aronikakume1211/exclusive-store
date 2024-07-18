@@ -4,8 +4,10 @@ import {
     Contact,
     Cart,
     Wishlist,
-    Product
+    Product,
+    Signup
 } from "@/views";
+import Signin from '@/views/Signup/Signin.vue';
 
 export default [
     {
@@ -51,6 +53,24 @@ export default [
         meta: {
             title: 'Product',
             icon: 'product'
+        }
+    },
+    {
+        path: '/login',
+        component: Signin,
+        name: 'signin',
+        meta: {
+            title: 'Signin',
+            icon: 'signin'
+        }
+    },
+    {
+        path: '/sign-up',
+        component: Signup,
+        name: 'signup',
+        meta: {
+            title: 'Signup',
+            icon: 'signup'
         }
     },
     {
