@@ -3,10 +3,13 @@ import { RouterLink } from "vue-router";
 import { useCartStore } from "@/store/cartStore";
 import { trimmedTitle } from "@/helper/utils";
 import Button from "@/helper/button.vue";
-import logo from '@/assets/images/loader.gif';
+import logo from "@/assets/images/loader.gif";
 import { reactive } from "vue";
+// import VBtn from "vuetify/lib/components/VBtn";
 const cartStore = useCartStore();
 const cartItems = cartStore.cartItems;
+
+console.log('Cart Items', cartItems);
 
 const updateCart = () => {
   // cartStore.updateCart();
@@ -15,7 +18,7 @@ const updateCart = () => {
 const state = reactive({
   quantity: 1,
   couponCode: "",
-  loading: false
+  loading: false,
 });
 
 const applyCouponCode = () => {
@@ -28,12 +31,12 @@ const applyCouponCode = () => {
     })
     .catch((err) => {
       console.log(err);
-    }).finally(() => {
+    })
+    .finally(() => {
       state.loading = false;
       //  updateCart();
-     });
+    });
 };
-
 </script>
 <template>
   <div class="container conatiner_not_found">
@@ -89,12 +92,26 @@ const applyCouponCode = () => {
               v-model="state.couponCode"
               placeholder="Coupon Code"
             />
-            <Button variant="danger" @click="applyCouponCode"
-              style="position: relative;">
-              <img v-if="state.loading" :src="logo" alt="" width="16" height="16" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"  />
-              Apply Coupon
-              </Button
+            <Button
+              variant="danger"
+              @click="applyCouponCode"
+              style="position: relative"
             >
+              <img
+                v-if="state.loading"
+                :src="logo"
+                alt=""
+                width="16"
+                height="16"
+                style="
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                "
+              />
+              Apply Coupon
+            </Button>
           </p>
         </div>
         <div class="cart_total_container">

@@ -3,12 +3,21 @@ import { RouterLink } from "vue-router";
 import logo from "../../assets/images/logo.png";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
+import { watch } from "vue";
 
 const cartStore = useCartStore();
 const wishlistStore = useWishlistStore();
+watch(
+  () => cartStore.isDark,
+  (newVal) => {
+    document.body.style.backgroundColor = newVal ? "#121212" : "#FFFFFF";
+    document.body.style.transition="all 0.5s ease-in-out";
+  },
+  { immediate: true }
+);
 </script>
 <template>
-  <nav>
+  <nav :dark="cartStore.isDark">
     <div class="top_navbar">
       <p>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!</p>
       <RouterLink to="/shop">Shop Now</RouterLink>
@@ -53,6 +62,13 @@ const wishlistStore = useWishlistStore();
               cartStore.cartItemsCount
             }}</span>
           </RouterLink>
+        </p>
+        <p>
+          <i
+            :class="cartStore.isDark ? 'pi pi-sun' : 'pi pi-moon'"
+            style="font-size: 18px; cursor: pointer"
+            @click="cartStore.toggleDarkMode"
+          ></i>
         </p>
       </div>
     </div>

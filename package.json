@@ -2,23 +2,35 @@
   "name": "exclusive",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:unit": "jest"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.24.8",
+    "@mdi/font": "7.4.47",
     "axios": "^1.7.2",
+    "babel-jest": "^29.7.0",
     "pinia": "^2.1.7",
     "primeicons": "^7.0.0",
     "vue": "^3.4.29",
     "vue-router": "^4.4.0",
-    "vue-spinner": "^1.0.4"
+    "vue-spinner": "^1.0.4",
+    "vuetify": "^3.6.13"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
-    "sass": "^1.77.8",
-    "vite": "^5.3.1"
+    "@vue/cli-plugin-unit-jest": "^5.0.8",
+    "@vue/test-utils": "^2.4.6",
+    "axios-mock-adapter": "^1.22.0",
+    "jest": "^27.5.1",
+    "sass": "1.77.6",
+    "unplugin-fonts": "^1.1.1",
+    "unplugin-vue-components": "^0.27.2",
+    "vite": "^5.3.3",
+    "vite-plugin-vuetify": "^2.0.3"
   }
 }

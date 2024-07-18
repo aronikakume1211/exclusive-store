@@ -5,6 +5,7 @@ export const useCartStore = defineStore("cart", {
         cartItems: [],
         couponCode: '',
         discount: 10,
+        isDark: JSON.parse(localStorage.getItem('isDark')) || false,
     }),
     actions: {
         addItemToCart(item) {
@@ -22,19 +23,23 @@ export const useCartStore = defineStore("cart", {
             this.cartItems = [];
         },
 
-        applyCoupon(couponCode){
+        applyCoupon(couponCode) {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    if(couponCode === 'FREE_SHIPPING'){
+                    if (couponCode === 'FREE_SHIPPING') {
                         this.discount = 10;
-                        this.couponCode= couponCode;
+                        this.couponCode = couponCode;
                         resolve('Coupon Applied');
 
-                    }else{
+                    } else {
                         reject('Invalid Coupon');
                     }
                 }, 1000);
             });
+        },
+        toggleDarkMode() {
+            this.isDark = !this.isDark;
+            localStorage.setItem('isDark', JSON.stringify(this.isDark));
         }
     },
     getters: {
