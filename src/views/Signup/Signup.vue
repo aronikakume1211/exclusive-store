@@ -2,9 +2,42 @@
 import signup from "../../assets/images/signup.jpeg";
 import Button from "@/helper/button.vue";
 import { RouterLink } from "vue-router";
+import { useUserStore } from "@/store/userStore";
+import { reactive } from "vue";
+import { useRouter } from "vue-router";
+import loading from '@/assets/images/loader.gif';
 
+const userStore = useUserStore();
+const router = useRouter();
+
+const state = reactive({
+  firstname: "",
+  email: "",
+  password: "",
+  error: "",
+});
+
+const validateForm = () => {
+  if (!state.firstname || !state.email || !state.password) {
+    console.log("All fields are required.");
+    state.error='All fields are required.';
+    return false;
+  }
+  return true;
+};
 const handleSubmit = () => {
-  console.log("Submit");
+  if (!validateForm()) {
+    return;
+  }
+  try {
+    const res = userStore.register(state);
+    res.then((response) => {
+      router.push("/login");
+    });
+    // console.log(res);
+  } catch (e) {
+    console.log("Failed to register");
+  }
 };
 </script>
 <template>
@@ -18,7 +51,7 @@ const handleSubmit = () => {
       <v-form v-model="valid" @submit.prevent="handleSubmit">
         <v-col cols="12" md="12">
           <v-text-field
-            v-model="firstname"
+            v-model="state.firstname"
             :counter="10"
             :rules="nameRules"
             label="First name"
@@ -27,10 +60,9 @@ const handleSubmit = () => {
           ></v-text-field>
         </v-col>
 
-
         <v-col cols="12" md="12">
           <v-text-field
-            v-model="email"
+            v-model="state.email"
             :rules="emailRules"
             label="E-mail"
             hide-details
@@ -39,15 +71,20 @@ const handleSubmit = () => {
         </v-col>
         <v-col cols="12" md="12">
           <v-text-field
-            v-model="password"
+            v-model="state.password"
             :rules="passwordRules"
             label="Password"
             hide-details
             required
           ></v-text-field>
         </v-col>
+        <p style="color: #db4444;">{{ state.error }}</p>
+
         <Button variant="danger" type="submit" style="width: 100%"
-          >Create Account</Button
+          >Create Account
+
+          <img v-if="userStore.isLoading" :src="loading" alt="loading" width="22" height="22" style="position: absolute; margin-left: 4px;" />
+          </Button
         >
       </v-form>
       <Button variant="border" type="submit" style="width: 100%"

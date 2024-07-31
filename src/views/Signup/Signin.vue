@@ -6,7 +6,7 @@ import { useUserStore } from "@/store/userStore";
 import { reactive } from "vue";
 import { capitalize } from "@/filters/filters";
 import { useRouter } from "vue-router";
-
+import loading from '@/assets/images/loader.gif';
 
 const userStore = useUserStore();
 const msg = "log in to Exclusive";
@@ -18,10 +18,10 @@ const state = reactive({
 });
 
 const handleSubmit = async () => {
- await userStore.login({ email: state.email, password: state.password });
- if(userStore.user) {
-   router.push('/')
- }
+  await userStore.login({ email: state.email, password: state.password });
+  if (userStore.user) {
+    router.push("/");
+  }
 };
 </script>
 <template>
@@ -54,7 +54,17 @@ const handleSubmit = async () => {
           ></v-text-field>
         </v-col>
         <div class="signup_button_container">
-          <Button variant="danger" type="submit">Log in</Button>
+          <Button variant="danger" type="submit"
+            >Log in
+            <img
+              v-if="userStore.isLoading"
+              :src="loading"
+              alt="loading"
+              width="22"
+              height="22"
+              style="position: absolute; margin-left: 4px"
+            />
+          </Button>
           <RouterLink to="/login">Forget Password?</RouterLink>
         </div>
       </v-form>

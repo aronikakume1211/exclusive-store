@@ -1,21 +1,22 @@
 import axios from "axios";
 import { defineStore } from "pinia";
-import {useRouter} from 'vue-router'
 
 export const useUserStore = defineStore('userStore', {
     state: () => {
         const user = JSON.parse(localStorage.getItem('user')) || null;
         const token = localStorage.getItem('token') || null;
         const isLoggedIn = !!user && !!token;
+        const isLoading = false;
         return {
             user,
             token,
             isLoggedIn,
+            isLoading
         }
     },
     actions: {
         async login(item) {
-            const router = useRouter();
+            this.isLoading = true;
             await axios.post(`${import.meta.env.VITE_API_URL}/user/login`, {
                 username: item.email,
                 password: item.password
@@ -25,11 +26,21 @@ export const useUserStore = defineStore('userStore', {
                 localStorage.setItem('user', JSON.stringify(response.data));
                 localStorage.setItem('token', response.data.token);
 
-                // redirect to home page
-                router.push('/');
             }).catch(error => {
                 console.error('Login error:', error);
             });
+        },
+        async register(newUser) {
+            this.isLoading = true;
+            await axios.post(`${import.meta.env.VITE_API_URL}/users/add`, {
+                newUser
+            }).then((response) => {
+                this.isLoading = false;
+                return response;
+
+            }).catch((err) => {
+                console.log('Error: ', err);
+            })
         },
         logout() {
             this.user = null;
