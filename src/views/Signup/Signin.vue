@@ -2,9 +2,26 @@
 import signup from "../../assets/images/signup.jpeg";
 import Button from "@/helper/button.vue";
 import { RouterLink } from "vue-router";
+import { useUserStore } from "@/store/userStore";
+import { reactive } from "vue";
+import { capitalize } from "@/filters/filters";
+import { useRouter } from "vue-router";
 
-const handleSubmit = () => {
-  console.log("Submit");
+
+const userStore = useUserStore();
+const msg = "log in to Exclusive";
+const router = useRouter();
+
+const state = reactive({
+  email: "michaelw",
+  password: "michaelwpass",
+});
+
+const handleSubmit = async () => {
+ await userStore.login({ email: state.email, password: state.password });
+ if(userStore.user) {
+   router.push('/')
+ }
 };
 </script>
 <template>
@@ -13,12 +30,12 @@ const handleSubmit = () => {
       <img :src="signup" alt="signup" />
     </div>
     <div class="signup_form_container">
-      <h1>Log in to Exclusive</h1>
+      <h1>{{ capitalize(msg) }}</h1>
       <p>Enter your details below</p>
       <v-form v-model="valid" @submit.prevent="handleSubmit">
         <v-col cols="12" md="12">
           <v-text-field
-            v-model="email"
+            v-model="state.email"
             :rules="emailRules"
             label="E-mail"
             aria-placeholder="Email or Phone Number"
@@ -28,9 +45,9 @@ const handleSubmit = () => {
         </v-col>
         <v-col cols="12" md="12">
           <v-text-field
-            v-model="password"
+            v-model="state.password"
             :rules="passwordRules"
-            label="E-mail"
+            label="Password"
             aria-placeholder="Password"
             hide-details
             required

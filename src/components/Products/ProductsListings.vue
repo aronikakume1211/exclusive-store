@@ -10,9 +10,6 @@ const { products, loading, error, fetchProducts } = useProducts();
 
 onMounted(() => {
   fetchProducts(8);
-  console.log(products);
-  console.log(loading);
-  console.log(error);
 });
 const handleClick = () => {
   console.log("clicked");

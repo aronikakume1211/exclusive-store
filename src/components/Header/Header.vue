@@ -3,17 +3,28 @@ import { RouterLink } from "vue-router";
 import logo from "../../assets/images/logo.png";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
-import { reactive, watch } from "vue";
+import { useUserStore } from "@/store/userStore";
+import { onMounted, reactive, watch } from "vue";
 
 const cartStore = useCartStore();
 const wishlistStore = useWishlistStore();
+const userStore = useUserStore();
 
 const state = reactive({
   isOpen: false,
+  isLoggedIn: false,
+  user: [],
 });
 
 const toggleUserMenu = () => {
   state.isOpen = !state.isOpen;
+};
+
+const logout = () => {
+  userStore.logout();
+  cartStore.clearCart();
+  toggleUserMenu();
+  
 };
 
 watch(
@@ -25,6 +36,9 @@ watch(
   { immediate: true }
 );
 
+onMounted(() => {
+  
+});
 </script>
 <template>
   <nav :dark="cartStore.isDark">
@@ -81,11 +95,21 @@ watch(
           ></i>
         </p> -->
         <div class="navbar_profile">
-          <i
-          @click="toggleUserMenu"
-            class="pi pi-user"
-            style="font-size: 20px; cursor: pointer; margin-left: 10px"
-          ></i>
+          <img
+            v-if="userStore.user"
+            @click="toggleUserMenu"
+            :src="userStore.user?.image"
+            class="loggedin"
+            alt=""
+          />
+          <RouterLink v-else to="/sign-up">
+            <i
+              
+              :class="userStore.user ? 'pi pi-user loggedin' : 'pi pi-user'"
+              style="font-size: 20px; cursor: pointer; margin-left: 10px"
+            ></i>
+
+          </RouterLink>
           <div v-if="state.isOpen" class="navbar_profile_container">
             <ul>
               <li>
@@ -106,7 +130,7 @@ watch(
               </li>
               <li>
                 <i class="pi pi-sign-out"></i>
-                <RouterLink to="/my-account">Logout</RouterLink>
+                <button @click="logout" to="/my-account">Logout</button>
               </li>
             </ul>
           </div>

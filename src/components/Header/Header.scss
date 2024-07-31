@@ -117,7 +117,22 @@ nav {
     }
 
     .navbar_profile {
-        position: relative
+        position: relative;
+
+        .loggedin{
+            background: #0b0808;
+            font-size: 18px !important;
+            border-radius: 50%;
+            height: 32px;
+            width: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            cursor: pointer;
+            // padding: 10px;
+
+        }
     }
 
     .navbar_profile_container {
@@ -140,18 +155,19 @@ nav {
                 gap: 15px;
                 align-items: center;
                 margin: 10px 0px;
+                cursor: pointer;
                 i{
 
                     font-size: 22px;
                 }
 
-                a {
+                button, a {
                     //styleName: Title/14PX Regular;
                     font-family: Poppins;
                     font-size: 16px;
                     font-weight: 400;
                     line-height: 21px;
-                    text-align: center;
+                    text-align: left;
                     text-decoration: none;
                     color: #fff;
                 }
